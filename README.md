@@ -21,7 +21,7 @@ result = {
 _id: ObjectId("63c29653bf6c5802ccb48d0e"),
     http: "http 10",
     request: "POST /cgi-bin/ViewLog.asp",
-    ip: "172.91.47.43",
+    ip: "172.xx.xx.43",
     headers: {
         "X-Real-IP": "172.xx.xx.43",
         Host: "127.0.0.1:7000",
