@@ -1,0 +1,12 @@
+[Unit]
+Description=Fakeweb server
+After=network.target
+
+[Service]
+User=###USERNAME###
+Type=simple
+ExecStart=/home/###USERNAME###/deploy/apps/fakeweb/venv/bin/python3 /home/###USERNAME###/deploy/apps/fakeweb/main.py
+TimeoutStopSec=30
+
+[Install]
+WantedBy=default.target
