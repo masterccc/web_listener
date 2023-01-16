@@ -17,7 +17,12 @@ async def handler_get(request):
     global fakeweb_db
 
     content = await request.content.read(-1)
-    content = base64.b64decode(content)
+    try:
+        try_content = base64.b64decode(content)
+        content = try_content
+    except:
+        pass
+
     url = request.raw_path
     http =  request.scheme + " " + "".join([str(s) for s in request.version])
 
