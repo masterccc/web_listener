@@ -13,16 +13,15 @@ web_page = open("/var/www/html/index.nginx-debian.html","r").read()
 
 
 async def handler_get(request):
-    
     global fakeweb_db
 
     content = await request.content.read(-1)
+    content = content.decode("utf-8",errors="replace")
+    try_content = None
     try:
         try_content = base64.b64decode(content)
-        content = try_content
     except:
         pass
-
     url = request.raw_path
     http =  request.scheme + " " + "".join([str(s) for s in request.version])
 
@@ -32,11 +31,15 @@ async def handler_get(request):
         "ip": request.headers.get('X-Real-IP'),
         "headers": request.headers,
         "content": content,
+        "try_decode": try_content,
     }
+
     if url.strip() != '/' or content:
         fakeweb_db.requests.insert_one(result)
 
     return web.Response(status=200, body=web_page, content_type='text/html')
+
+
 
 
 def init():
